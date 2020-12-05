@@ -1,6 +1,10 @@
 ## SSH
-key.pemのパーミッションは400にする
+key.pemのパーミッションは**400**にする
 ssh ec2-user@54.199.50.230 -i ~/.ssh/key.pem
+
+- ssh接続がタイムアウトした時はSGの設定を見直す
+- sshキーのパーミッションはしっかりと確認すること。
+- EC2にpub-keyが正しく設置されていて、かつローカルにprivate-keyがあることを確認する。
 
 keyを渡したい時のCLIの設定
 https://blog.suzuxander.com/aws/34.html
@@ -74,4 +78,8 @@ https://qiita.com/ryuzee/items/e3ce493f132f1981f57a
 # EC2 User Data
 EC2の起動時の実行シェルコマンドを設定できる
 
+# メモ
+- EC2は**停止中、または終了(削除)**されていると**課金されない。**
+- **EIPがアタッチされている場合、**EIPはEC2が停止していても**EIPのみ課金される**。
+- EIPは**EC2が起動している場合**はEIPの使用料金は**課金されない。**
 

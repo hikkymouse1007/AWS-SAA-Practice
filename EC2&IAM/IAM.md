@@ -19,4 +19,4 @@ Policy(以下を定義する)
 - Userに適切な権限を与える(不必要に権限を与えないこと)
 - PolicyはJSON
 - IAM Roleは1ロール/1アプリ
-- IAM credentialは共有しないこと
+- IAM **credentialは共有しないこと**
