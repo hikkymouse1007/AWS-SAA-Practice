@@ -31,6 +31,8 @@ export AWS_DEFAULT_PROFILE=cf-course
 ```
 
 インスタンス情報
+引数については以下を参照
+https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-services-ec2-instances.html
 
 ```
 aws ec2 describe-instances 
@@ -68,5 +70,8 @@ aws sts get-caller-identity --profile cf-course
 
 cliのユーザは有効なアカウントを使うこと
 https://qiita.com/ryuzee/items/e3ce493f132f1981f57a
+
+# EC2 User Data
+EC2の起動時の実行シェルコマンドを設定できる
 
 
