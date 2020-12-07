@@ -208,6 +208,35 @@ https://dev.classmethod.jp/articles/vpc-ec2-multi-eip/
 - ENIを独立して作成し、EC2にアタッチしたり、他のEC2にすでにアタッチしたENIを移動させることができる。
 - 特定のAZに属する。(AZは跨がない)
 
+# EC2 Hibernate
+- EC2の停止は以下の二つ。
+Stop: 再起動までディスク(EBS)上のデータが補完される
+Terminate: 破棄設定されているEBSボリューム(root)が消去される。
+- 起動時には以下のことが起こる。
+First Start: OS起動、UserDateスクリプトが実行される
+Following Start: OSが起動する
+=>　アプリケーションの起動、キャッシュのウォームアップが起こり時間がかかる。
+```
+インスタンスを休止すると、Amazon EC2 によってオペレーティングシステムに休止の実行 (suspend-to-disk) が指示されます。休止により、インスタンスメモリ (RAM) の内容が Amazon Elastic Block Store (Amazon EBS) ルートボリュームに保存されます。Amazon EC2 は、インスタンスのルートボリュームおよびアタッチされた EBS データボリュームを保持します。インスタンスを再起動すると、以下のようになります。
+- EBS ルートボリュームは前の状態に復元されます。
+- RAM の内容が再ロードされます。
+- インスタンスで以前に実行されていたプロセスが再開されます。
+- 以前にアタッチされていたデータボリュームが再アタッチされ、インスタンスがそのインスタンス ID を保持します。
+```
+## Hibernate(休止状態)
+- インメモリの状態(RAM)が保存される
+- インスタンスの起動が高速(OSは停止せず、再起動もしない)
+https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/Hibernate.html
+
+![hibernation-flow](https://user-images.githubusercontent.com/54907440/101356903-13bc4c00-38dc-11eb-8b4f-29a184414b36.png)
+
+
+
+>インメモリデータベースはデータストレージを主にメインメモリ上で行うデータベース管理システムである。ディスクストレージ機構によるデータベースシステムと対比される。メインメモリデータベースは内部最適化アルゴリズムが簡素であり、相対的に少ないCPU命令を実行するので、ディスク最適化されたデータベースと比較して高速である
+
+
+
+
 ### ※terms
 - **underlying hardware** 基盤ハードウェア
 - **across** 横断して、またがって
@@ -222,3 +251,5 @@ https://dev.classmethod.jp/articles/vpc-ec2-multi-eip/
 - **EIPがアタッチされている場合、**EIPはEC2が停止していても**EIPのみ課金される**。
 - EIPは**EC2が起動している場合**はEIPの使用料金は**課金されない。**
 
+EC2まとめ
+https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528082#overview
