@@ -53,6 +53,51 @@ https://blog.serverworks.co.jp/tech/2017/01/05/elb-sticky/
 - LBとEC2の間の通信において、EC2にELBからのリクエストしか受け付けないSGを設ける事ができる。
 => この設定を間違えるとunhealtyになる
 
+## ALB
+### Features
+- HTTP/HTTPS/WebSocket
+- 複数ターゲットを設定できる
+- リダイレクト対応(http to https)
+- URLのパスに基づくルーティング
+- URLのクエリ、ヘッダに基づくルーティング
+- マイクロサービス・コンテナとの相性が良い
+- ECS内のポートマッピングに使える
+
+### Target Groups
+- EC2
+- ECS
+- Lambda
+- IP Address
+- 複数ターゲットグループを対象にできる
+- ターゲットグループ単位でのヘルスチェック
+
+### Good to know
+- ホスト名の固定
+- アプリサーバはからはクライアントからのIPは見れない
+- ヘッダ項目:X-Forward-ForにクライアントIPが格納される
+- X-Forward-PortとX-Forward-Protoも取得可能
+
+Httpのトラフィック
+A. Route/user => Usersインスタンスのターゲットグループへルーティング
+B. Route/search => Searchインスタンスのターゲットグループへルーティング
+=> インスタンス単位のルーティングが可能(マイクロサービス)
+
+## NLB
+### Features
+- 第4レイヤ
+- TCP & UDPの信号を扱う
+
+## Scaling Policy
+### Target Tracking Scaling
+- ターゲットのパラメータが指定した値になるようにスケーリング
+- e.g:ASGのCPUの平均値が40%になるようにスケーリング
+
+### Simple/Step Scaling
+- CloudWatchのアラームがトリガーされると(閾値設定)、インスタンスを追加、削減する
+- e.g: CPU使用率が70%を超えたらインスタンスを2個追加
+### Schedule Actions
+- 既知のトラフィックパターンに基づきスケーリングを予想する
+- e.g:ミニマムキャパシティを金曜日の5pmに10にあげる 
 ## Tips
 - LBは瞬時のスケーリングはできない.
 暖気申請が必要。
