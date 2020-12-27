@@ -111,6 +111,38 @@ SSE(ServerSideEncryption
  - MFA Delete: バージョニングされたバケットのオブジェクト削除にMFAの要求が可能
  - Pre Signed URLs: 有効期限つきURLの設定ができる
 
+### S3でhtmlファイルを公開する方法
+- アクセス許可でパブリックアクセスのブロックをオフにする
+- AWS Policy Generatorでポリシーを設定する
+    - Type of Policy:S3 BucketPolicy
+    - Effect: Allow
+    - Principal: *
+    
+    (*: all users)
+    - Actions: GetObject
+    - ARN: arn:aws:s3:::hikky-brand-new-bucket/* 
+
+    (* : all resources in S3 bucket)
+
+```
+# Policy JSON
+{
+  "Id": "Policy1609064348075",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1609064343228",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::hikky-brand-new-bucket/*",
+      "Principal": "*"
+    }
+  ]
+}
+```
+
  ### CORS(Cross-Origin Resource Sharing)
  - オリジン(Origin): scheme(protocol), host(domain), port
  https://www.example.com(protocol:http or https, host:www.example.com, port:80,443)
@@ -126,5 +158,10 @@ SSE(ServerSideEncryption
 - S3へのcross-originリクエストは、正しいCORSヘッダーが必要
 - テストによく出る
 - 特定のオリジンまたは全てのオリジン*(all origins)へ許可できる
+
+CORSの設定
+
+![スクリーンショット 2020-12-27 20 29 23](https://user-images.githubusercontent.com/54907440/103170825-ac663c00-488a-11eb-974b-5e218b23c0ef.png)
+![スクリーンショット 2020-12-27 19 15 40](https://user-images.githubusercontent.com/54907440/103170828-ae2fff80-488a-11eb-8df6-3490513e40af.png)
 
 
