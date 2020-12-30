@@ -1,6 +1,6 @@
 ec2-apache:
 	aws cloudformation deploy \
-    --template-file ./ec2-apache.yaml \
+    --template-file ./Yaml/ec2-apache.yaml \
     --stack-name ec2-apache \
     --parameter-overrides \
     KeyName=udemy \

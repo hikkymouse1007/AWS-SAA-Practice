@@ -1,7 +1,7 @@
 s3-bucket:
 	aws cloudformation deploy \
     --template-file ./s3.yaml \
-    --stack-name mybucket 
+    --stack-name mybucket
 
 rm-s3:
 	aws cloudformation delete-stack \
