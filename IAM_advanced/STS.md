@@ -63,3 +63,17 @@ SAML 2.0 フェデレーション
 - ユースケース
     - 特定のサービスへのアクセスを制限する（例：EMRを使用できない）
     - 明示的にサービスを無効にすることでPCIコンプライアンスを強制する
+
+## AWS Resource Access Manager(RAMs)
+- 所有しているAWSリソースを他のAWSアカウントと共有する 
+- 任意のアカウントまたは組織内で共有する
+- リソースの重複を避ける
+- VPC Subnet:
+    - すべてのリソースを同じサブネットで起動することを許可する
+    - 同じAWS Organizationsからでなければなりません。
+    - セキュリティグループとデフォルトのVPCを共有できない
+    - 参加者は自分のリソースを管理することができます。
+    - 参加者は、他の参加者や所有者に属するリソースを閲覧、変更、削除することができない
+- AWS Transit Gateway
+- Route53 Resolver Rules
+- License Manager Configurations
