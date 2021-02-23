@@ -6,7 +6,7 @@
     - AAAA: hostname to IPV6
     - CNAME: hostname to hostname
     - Alias: hostname to AWS resource
- 
+
 - Route53で使用可能なもの
     - パブリックドメイン
     - VPC内で名前解決されたプライベートドメイン

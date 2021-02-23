@@ -309,7 +309,7 @@ $ aws configure set default.s3.signature_version s3v4
     - アーカイブは「Vaults(金庫)」に保存されます
 
 - Amazon Glacier Deep Archive
-    - Amazon Glacier – 3つの復元オプション: 
+    - Amazon Glacier – 3つの復元オプション:
         - Expedited (1 to 5 minutes)
         - Standard (3 to 5 hours)
         - Bulk (5 to 12 hours)
